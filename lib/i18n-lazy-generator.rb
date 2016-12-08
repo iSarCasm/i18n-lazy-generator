@@ -1,4 +1,4 @@
-require "i18n/lazy/generator/version"
+require "i18n-lazy-generator/version"
 
 module I18n
   module Lazy
