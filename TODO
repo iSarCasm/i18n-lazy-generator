@@ -18,3 +18,14 @@ The end goal workflow of the gem:
   3.  - "i18n-lazy-generator delete [file path] [key]"
   4.  - "i18n-lazy-generator common [file path] [key]"
   5.  - "i18n-lazy-generator uncommon [file path] [key]"
+
+
+Modules:
+  Finder
+  Generator
+    KeyNameGenerator
+    KeyContentGenerator
+    InlineKeyGenerator
+  Replacer
+    Content Replacer
+    Key Replacer
