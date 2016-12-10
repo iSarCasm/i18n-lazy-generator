@@ -1,9 +1,4 @@
 require "i18n-lazy-generator/version"
 
-module I18n
-  module Lazy
-    module Generator
-      # Your code goes here...
-    end
-  end
-end
+require "i18n-lazy-generator/generator/generator"
+require "i18n-lazy-generator/generator/key_name_generator"
