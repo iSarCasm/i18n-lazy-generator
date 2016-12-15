@@ -28,7 +28,12 @@ describe I18n::Lazy::Generator::KeyContent do
       input:    "It is rainy <%= link_to('today', 'today.com') %> (go <%= link_to('check', 'google.com/weather') %>)",
       output:   'it is rainy %{link} (go %{link2})',
       comment:  "text with multiple erb links"
-    }
+    },
+    {
+      input:    "it is rainy <%= Time.now.day %> or <%= Time.now.day %>.",
+      output:   'it is rainy %{day} or %{day2}.',
+      comment:  "text with variable names collision"
+    },
   ]
 
   describe '.generate' do
