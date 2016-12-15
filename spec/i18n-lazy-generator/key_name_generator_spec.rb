@@ -43,6 +43,16 @@ describe I18n::Lazy::Generator::KeyName do
       input:    "<div><div>yo</em><alpachino alt='wtf'>",
       output:   "yo_html",
       comment:  "text with html tags (should add _html to an end & no tags in key name)"
+    },
+    {
+      input:    "It is rainy <%= Time.now.day %>",
+      output:   "it_is_rainy_day",
+      comment:  "text with erb"
+    },
+    {
+      input:    "It is rainy <%= link_to('today', 'today.com') %>",
+      output:   "it_is_rainy_today_html",
+      comment:  "text with erb link"
     }
   ]
 
