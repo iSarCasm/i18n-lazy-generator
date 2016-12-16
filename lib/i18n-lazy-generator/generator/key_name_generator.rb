@@ -3,7 +3,7 @@ module I18n::Lazy::Generator
     def self.generate(content)
       html_safety_control(content) do
         content = I18n::Lazy::Generator::ERB.interpolate(content) { |erb| erb_to_key(erb) }
-        content = remove_html(content)
+        content = I18n::Lazy::Generator::HTML.remove_html(content)
         content = to_snake_case(content)
         content = restrict_word_count(text: content, words: 5)
       end
@@ -12,17 +12,9 @@ module I18n::Lazy::Generator
     private
 
     def self.html_safety_control (content, &block)
-      should_add_html = contains_html?(content) || I18n::Lazy::Generator::ERB.contains_link?(content)
+      should_add_html = I18n::Lazy::Generator::HTML.is_html?(content) || I18n::Lazy::Generator::ERB.contains_link?(content)
       content = block.call
       should_add_html ? content + "_html" : content
-    end
-
-    def self.contains_html?(text)
-      text =~ /<(?!%).+?>/
-    end
-
-    def self.remove_html(text)
-      text.gsub(/<(?!%).+?>/,'')
     end
 
     def self.to_snake_case(text)
