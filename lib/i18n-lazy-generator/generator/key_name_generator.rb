@@ -1,25 +1,24 @@
 module I18n::Lazy::Generator
   module KeyName
     def self.generate(content)
-      should_add_html = contains_html?(content) || contains_erb_link?(content)
-      key_name = interpolate(content)
-      key_name = remove_html(key_name)
-      key_name = to_snake_case(key_name)
-      key_name = restrict_word_count(text: key_name, words: 5)
-      key_name += '_html' if should_add_html
-      key_name
+      html_safety_control(content) do
+        content = I18n::Lazy::Generator::ERB.interpolate(content) { |erb| erb_to_key(erb) }
+        content = remove_html(content)
+        content = to_snake_case(content)
+        content = restrict_word_count(text: content, words: 5)
+      end
+    end
+
+    private
+
+    def self.html_safety_control (content, &block)
+      should_add_html = contains_html?(content) || I18n::Lazy::Generator::ERB.contains_link?(content)
+      content = block.call
+      should_add_html ? content + "_html" : content
     end
 
     def self.contains_html?(text)
       text =~ /<(?!%).+?>/
-    end
-
-    def self.contains_erb_link?(text)
-      text.match(/(<%=.+?>)/).to_a.any? { |m| I18n::Lazy::Generator::ERB.link?(m) }
-    end
-
-    def self.interpolate(text)
-      text.gsub(/(<%=.+?>)/) { erb_to_key($1) }
     end
 
     def self.remove_html(text)
@@ -34,13 +33,11 @@ module I18n::Lazy::Generator
       text.split('_').first(words).join('_')
     end
 
-    private
-
     def self.erb_to_key(erb)
       if I18n::Lazy::Generator::ERB.link?(erb)
-        erb.match /(((?<=link_to\s\()|(?<=link_to\()).+(?=,))/
+        I18n::Lazy::Generator::ERB.link_label(erb)
       else
-        erb.gsub(/.+\./,'')
+        I18n::Lazy::Generator::ERB.last_identifier(erb)
       end
     end
   end

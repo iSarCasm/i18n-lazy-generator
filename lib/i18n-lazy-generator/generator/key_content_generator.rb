@@ -6,10 +6,8 @@ module I18n::Lazy::Generator
         # text = "\n" << text
         # text = text.gsub( /\n/, "\n\t" )
         # text = text.gsub "\t ", "\t"
-        # puts text
         # text = "%p" << text
         # text = text.gsub(/=.+$/, "SOME_VAR")
-        # puts text
         # text = Haml::Engine.new(text).render
         # text = text.gsub("SOME_VAR", "%{}")
         # text = text[6..-6]
