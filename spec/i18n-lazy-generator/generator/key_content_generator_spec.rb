@@ -32,8 +32,13 @@ describe I18n::Lazy::Generator::KeyContent do
     {
       input:    "it is rainy <%= Time.now.day %> or <%= Time.now.day %>.",
       output:   'it is rainy %{day} or %{day2}.',
-      comment:  "text with variable names collision"
+      comment:  "text with 1 variable name collision"
     },
+    {
+      input:    "it is rainy <%= Time.now.day %> or <%= Time.now.day %> or <%= Time.now.day %>. <%= alert %> <%= alert %>",
+      output:   'it is rainy %{day} or %{day2} or %{day3}. %{alert} %{alert2}',
+      comment:  "text with multple variable name collision"
+    }
   ]
 
   describe '.generate' do
