@@ -20,13 +20,13 @@ describe I18n::Lazy::Generator::KeyContent do
       comment:  "text with erb tags"
     },
     {
-      input:    "It is rainy <%= link_to('today', 'today.com') %>",
-      output:   'it is rainy %{link}.',
+      input:    "It is rainy <%= link_to('today', 'today.com') %>.",
+      output:   'It is rainy %{link}.',
       comment:  "text with erb link"
     },
     {
       input:    "It is rainy <%= link_to('today', 'today.com') %> (go <%= link_to('check', 'google.com/weather') %>)",
-      output:   'it is rainy %{link} (go %{link2})',
+      output:   'It is rainy %{link} (go %{link2})',
       comment:  "text with multiple erb links"
     },
     {

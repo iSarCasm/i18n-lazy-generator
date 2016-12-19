@@ -1,7 +1,11 @@
 module I18n::Lazy::Generator
   module ERB
-    def self.interpolate(text, &block)
-      text.gsub(/(<%=.+?>)/) { block.call($1) }
+    def self.map(text, &block)
+      text.gsub(/(<%=.+?%>)/) { block.call($1) }
+    end
+
+    def self.escape(text)
+      text.gsub(/(^(<%=\s*))/, '').gsub(/((\s*%>)$)/, '')
     end
 
     def self.contains_link?(text)
