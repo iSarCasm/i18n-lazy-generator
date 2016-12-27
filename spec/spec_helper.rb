@@ -8,3 +8,11 @@ def check_matches(matches, proc)
     end
   end
 end
+
+def check_input_output_comment(tests, proc)
+  tests.each do |test|
+    it "works correctly with #{test[:comment]}" do
+      expect(proc.call(test[:input])).to eq(test[:output])
+    end
+  end
+end

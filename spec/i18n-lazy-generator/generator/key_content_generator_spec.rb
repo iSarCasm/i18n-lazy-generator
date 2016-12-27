@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe I18n::Lazy::Generator::KeyContent do
-  subject { I18n::Lazy::Generator::KeyContent }
+  subject = I18n::Lazy::Generator::KeyContent
 
   tests = [
     {
@@ -42,10 +42,6 @@ describe I18n::Lazy::Generator::KeyContent do
   ]
 
   describe '.generate' do
-    tests.each do |test|
-      it "works correctly with #{test[:comment]}" do
-        expect(subject.generate(test[:input])).to eq(test[:output])
-      end
-    end
+    check_input_output_comment(tests, subject.method(:generate))
   end
 end
