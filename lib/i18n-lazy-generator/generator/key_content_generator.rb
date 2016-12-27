@@ -16,10 +16,10 @@ module I18n::Lazy::Generator
 
       def self.collision_handled(element, array)
         new_element = element
-        i = 2
+        suffix = 2
         while array.include?(new_element)
-          new_element = element + i.to_s
-          i += 1
+          new_element = element + suffix.to_s
+          suffix += 1
         end
         array << new_element
         new_element
