@@ -1,10 +1,10 @@
 module I18n::Lazy::Generator
   module ERB
-    def self.map(text, &block)
+    def self.substitute_erb_with(text, &block)
       text.gsub(/(<%=.+?%>)/) { block.call($1) }
     end
 
-    def self.escape(text)
+    def self.escape_tags(text)
       text.gsub(/(^(<%=\s*))/, '').gsub(/((\s*%>)$)/, '')
     end
 
@@ -18,20 +18,20 @@ module I18n::Lazy::Generator
 
     def self.last_identifier(text)
       with_dots = text.scan(/((?<=\.)\w+(?=\W)*)/).flatten
-      if with_dots.empty? then
+      unless with_dots.empty? then
+        with_dots.last
+      else
         without_dots = text.scan(/(\w+(?=\W))/).flatten
         unless without_dots.empty? then
           without_dots.first
         else
           text
         end
-      else
-        with_dots.last
       end
     end
 
     def self.link_label(text)
-      text.match /(((?<=link_to\s\()|(?<=link_to\()).+(?=,))/
+      text.match(/((((?<=link_to\s\()|(?<=link_to\()).+(?=,))|(((?<=link_to\s))[^\(].+(?=,)))/).to_s
     end
   end
 end

@@ -8,7 +8,7 @@ module I18n::Lazy::Generator
 
       def self.substitute_variables(text)
         used_variables = []
-        I18n::Lazy::Generator::ERB.map(text) do |erb|
+        I18n::Lazy::Generator::ERB.substitute_erb_with(text) do |erb|
           variable = erb_to_variable(erb)
           YAML.variable collision_handled(variable, used_variables)
         end
@@ -26,7 +26,7 @@ module I18n::Lazy::Generator
       end
 
       def self.erb_to_variable(erb)
-        erb = I18n::Lazy::Generator::ERB.escape(erb)
+        erb = I18n::Lazy::Generator::ERB.escape_tags(erb)
         if I18n::Lazy::Generator::ERB.link?(erb)
           "link"
         else

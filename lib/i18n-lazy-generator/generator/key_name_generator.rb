@@ -1,8 +1,9 @@
+require 'pry'
 module I18n::Lazy::Generator
   module KeyName
     def self.generate(content)
       html_safety_control(content) do
-        content = I18n::Lazy::Generator::ERB.map(content) { |erb| erb_to_key(erb) }
+        content = I18n::Lazy::Generator::ERB.substitute_erb_with(content) { |erb| erb_to_key(erb) }
         content = I18n::Lazy::Generator::HTML.remove_html(content)
         content = to_snake_case(content)
         content = restrict_word_count(text: content, words: 5)
