@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe I18n::Lazy::Generator::ERB do
-  subject { I18n::Lazy::Generator::ERB }
+  subject = I18n::Lazy::Generator::ERB
 
   describe '.substitute_erb_with' do
     it 'enumerates on each erb tag' do
@@ -18,6 +18,7 @@ describe I18n::Lazy::Generator::ERB do
   end
 
   describe '.contains_link?' do
+
     context 'returns whether string contains erb links' do
       matches = {
         "Simple test" => false,
@@ -26,11 +27,7 @@ describe I18n::Lazy::Generator::ERB do
         '<%= link_to(rofl, "malware.soft") %>'  => true,
       }
 
-      matches.each do |test, result|
-        it "#{test} => #{result}" do
-          expect(subject.contains_link?(test)).to eq result
-        end
-      end
+      check_matches(matches, subject.method(:contains_link?))
     end
   end
 
@@ -41,11 +38,7 @@ describe I18n::Lazy::Generator::ERB do
         "link to simple test"                 => false
       }
 
-      matches.each do |test, result|
-        it "#{test} => #{result}" do
-          expect(subject.link?(test)).to eq result
-        end
-      end
+      check_matches(matches, subject.method(:link?))
     end
   end
 
@@ -60,11 +53,7 @@ describe I18n::Lazy::Generator::ERB do
         'func x'            => 'func'
       }
 
-      matches.each do |test, result|
-        it "#{test} => #{result}" do
-          expect(subject.last_identifier(test)).to eq result
-        end
-      end
+      check_matches(matches, subject.method(:last_identifier))
     end
   end
 
@@ -77,11 +66,7 @@ describe I18n::Lazy::Generator::ERB do
         "link_to(var, link)"              => "var"
       }
 
-      matches.each do |test, result|
-        it "#{test} => #{result}" do
-          expect(subject.link_label(test)).to eq result
-        end
-      end
+      check_matches(matches, subject.method(:link_label))
     end
   end
 end
