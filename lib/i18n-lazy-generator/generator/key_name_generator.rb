@@ -13,7 +13,7 @@ module I18n::Lazy::Generator
     private
 
     def self.html_safety_control (content, &block)
-      should_add_html = I18n::Lazy::Generator::HTML.is_html?(content) || I18n::Lazy::Generator::ERB.contains_link?(content)
+      should_add_html = I18n::Lazy::Generator::HTML.contains_html?(content) || I18n::Lazy::Generator::ERB.contains_link?(content)
       content = block.call
       should_add_html ? content + "_html" : content
     end

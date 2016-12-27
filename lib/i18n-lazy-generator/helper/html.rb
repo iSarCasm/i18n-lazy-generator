@@ -1,7 +1,7 @@
 module I18n::Lazy::Generator
   module HTML
-    def self.is_html?(text)
-      text =~ /<(?!%).+?>/
+    def self.contains_html?(text)
+      !!(text =~ /<(?!%).+?>/)
     end
 
     def self.remove_html(text)
