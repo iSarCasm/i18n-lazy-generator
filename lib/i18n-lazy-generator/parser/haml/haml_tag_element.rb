@@ -2,13 +2,15 @@ module I18n::Lazy::Generator
   class HamlTagElement < ParsedElement
     def initialize parsed_element
       @content = parsed_element.content
+      @start   = parsed_element.start
+      @end     = parsed_element.end
     end
 
     def can_add? char, index
       if char != ' ' && char != '=' && char != '-' then
         true
       else
-        @finished = true
+        finish index-1
         false
       end
     end

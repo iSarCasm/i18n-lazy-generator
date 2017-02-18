@@ -1,6 +1,6 @@
 module I18n::Lazy::Generator
   class ParsedElement
-    attr_reader :content
+    attr_reader :content, :start, :end
 
     def initialize
       @content  = ""
@@ -14,7 +14,6 @@ module I18n::Lazy::Generator
     def add(char, index, transitions)
       @start    = index if @content.empty?
       @content  += char
-      update_finished
       @end      = index if finished?
       new_self = nil
       transitions.each do |t|
@@ -27,11 +26,13 @@ module I18n::Lazy::Generator
       @content
     end
 
-    def finished?
-      @finished
+    def finish index
+      @end      = index
+      @finished = true
     end
 
-    def update_finished
+    def finished?
+      @finished
     end
 
     def self.transition parsed_element
