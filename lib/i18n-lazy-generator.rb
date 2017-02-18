@@ -7,6 +7,7 @@ require "i18n-lazy-generator/generator/key_content_generator"
 
 require "i18n-lazy-generator/parser/parser"
 require "i18n-lazy-generator/parser/parsed_element"
+require "i18n-lazy-generator/parser/text_element"
 require "i18n-lazy-generator/parser/white_space_element"
 require "i18n-lazy-generator/parser/haml/haml_tag_element"
 require "i18n-lazy-generator/parser/haml/haml_text_element"

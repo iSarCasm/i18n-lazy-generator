@@ -35,4 +35,26 @@ describe I18n::Lazy::Generator::HAMLParser do
       end
     end
   end
+
+  describe '.parse_and_finalize' do
+    context 'returns Array of Elements' do
+      it do
+        expect(subject.parse_and_finalize(@haml_1).map{|x| x.content}).to eq [
+          "#content\n",
+          "  ",
+          ".left.column\n",
+          "    ",
+          "%h2", " ",
+          "Welcome to our site!",
+          "\n    ",
+          "%p", "= print_information",
+          "\n  ",
+          ".right.column\n",
+          "    ",
+          "= render :partial => \"sidebar\"",
+          "\n"
+        ]
+      end
+    end
+  end
 end

@@ -24,5 +24,9 @@ module I18n::Lazy::Generator
       end
       elements << current
     end
+
+    def self.parse_and_finalize(data)
+      self.finalize self.parse(data)
+    end
   end
 end

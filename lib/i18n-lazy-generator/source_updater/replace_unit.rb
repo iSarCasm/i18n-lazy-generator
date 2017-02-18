@@ -1,5 +1,7 @@
 module I18n::Lazy::Generator
   class ReplaceUnit
+    attr_reader :data
+
     def initialize(start: 0, finish: 0, data: "")
       throw "finish is less than start" if finish < start
       @start  = start
@@ -8,9 +10,7 @@ module I18n::Lazy::Generator
     end
 
     def apply(string)
-      throw "string is too small" if string.length < @finish
-      string[@start..@finish] = @data
-      string
+      string[0...@start] + @data + string[@finish+1..-1]
     end
   end
 end
