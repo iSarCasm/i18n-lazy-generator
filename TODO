@@ -1,31 +1,6 @@
 The end goal workflow of the gem:
   1.  - "i18n-lazy-generator generate [file path] [--interactive] [--no-common]"
-      - Detect given path format (Folder/HTML/HAML/jade/etc.)
-      - Process into HTML
-      - Parse HTML file and divide into text-blocks (keys)
-      = For each text-block:
-        - Generate .YML "key: content" pair and add to keys
-          - Generate key name ("_html", collisions)
-          - Generate key content (substitute erb with i18n vars)
-        - Generate HTML inline key
-          - Generate ERB code
-          - Using var interpolation
-        ? Process HTML inline key into source file format if needed (like HAML)
-        ? Ask user if modification is correct
-        - Modify files and continue
-
   2.  - "i18n-lazy-generator rename [file path] [key] [new name]"
   3.  - "i18n-lazy-generator delete [file path] [key]"
   4.  - "i18n-lazy-generator common [file path] [key]"
   5.  - "i18n-lazy-generator uncommon [file path] [key]"
-
-
-Modules:
-  Finder
-  Generator
-    KeyNameGenerator
-    KeyContentGenerator
-    InlineKeyGenerator
-  Replacer
-    Content Replacer
-    Key Replacer
