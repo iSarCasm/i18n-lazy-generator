@@ -1,5 +1,7 @@
 The end goal workflow of the gem:
   1.  - "i18n-lazy-generator generate [file path] [--interactive] [--no-common]"
+        - ask config path
+        - ask context
   2.  - "i18n-lazy-generator rename [file path] [key] [new name]"
   3.  - "i18n-lazy-generator delete [file path] [key]"
   4.  - "i18n-lazy-generator common [file path] [key]"

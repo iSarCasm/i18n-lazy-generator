@@ -2,6 +2,8 @@ require 'yaml'
 require 'deep_merge'
 require "i18n-lazy-generator/version"
 
+require "i18n-lazy-generator/cli"
+
 require "i18n-lazy-generator/source_updater/source_updater"
 require "i18n-lazy-generator/config_updater/config_updater"
 
