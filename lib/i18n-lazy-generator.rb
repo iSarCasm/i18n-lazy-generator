@@ -1,6 +1,6 @@
 require "i18n-lazy-generator/version"
 
-require "i18n-lazy-generator/source_updater/replace_unit"
+require "i18n-lazy-generator/source_updater/source_updater"
 
 require "i18n-lazy-generator/generator/key_name_generator"
 require "i18n-lazy-generator/generator/key_content_generator"

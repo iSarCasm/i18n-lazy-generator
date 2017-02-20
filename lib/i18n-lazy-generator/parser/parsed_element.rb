@@ -1,6 +1,7 @@
 module I18n::Lazy::Generator
   class ParsedElement
-    attr_reader :content, :start, :end
+    attr_reader :start, :end
+    attr_accessor :content
 
     def initialize
       @content  = ""
