@@ -1,6 +1,10 @@
+require 'yaml'
+require 'deep_merge'
 require "i18n-lazy-generator/version"
 
 require "i18n-lazy-generator/source_updater/source_updater"
+require "i18n-lazy-generator/config_updater/config_updater"
+
 
 require "i18n-lazy-generator/generator/key_name_generator"
 require "i18n-lazy-generator/generator/key_content_generator"
