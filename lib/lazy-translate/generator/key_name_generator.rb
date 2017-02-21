@@ -26,11 +26,7 @@ module LazyTranslate
     end
 
     def self.erb_to_key(erb)
-      if ERB.link?(erb)
-        ERB.link_label(erb)
-      else
-        ERB.last_identifier(erb)
-      end
+      ERB.link?(erb) ? ERB.link_label(erb) : ERB.last_identifier(erb)
     end
   end
 end
