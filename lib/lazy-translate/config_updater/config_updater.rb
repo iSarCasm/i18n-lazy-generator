@@ -18,7 +18,11 @@ module LazyTranslate
     def self.new_keys_hash(config, context, elements)
       elements.each.with_object({}) do |el, new_hash|
         if el.class == LazyTranslate::TextElement then
-          deep_store(new_hash, context, LazyTranslate::KeyName.key_content_hash(el.content))
+          key_content_pair = {
+            LazyTranslate::KeyNameGenerator.generate(el.content) =>
+            LazyTranslate::KeyContentGenerator.generate(el.content)
+          }
+          deep_store(new_hash, context, key_content_pair)
         end
       end
     end

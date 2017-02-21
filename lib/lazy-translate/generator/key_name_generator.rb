@@ -1,10 +1,6 @@
 require 'pry'
 module LazyTranslate
-  module KeyName
-    def self.key_content_hash(content)
-      {generate(content) => content}
-    end
-
+  module KeyNameGenerator
     def self.generate(content)
       make_unsafe_if_html_used(content) do
         content = LazyTranslate::ERB.substitute_erb_with(content) { |erb| erb_to_key(erb) }

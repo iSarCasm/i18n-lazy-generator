@@ -17,7 +17,7 @@ module LazyTranslate
     def self.substitute_text_with_keys
       @elements.each do |el|
         if el.class == LazyTranslate::TextElement then
-          el.content = "=t('.#{LazyTranslate::KeyName.generate(el.content)}')"
+          el.content = "=t('.#{LazyTranslate::KeyNameGenerator.generate(el.content)}')"
         end
       end
     end

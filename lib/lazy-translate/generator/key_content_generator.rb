@@ -1,5 +1,5 @@
 module LazyTranslate
-  module KeyContent
+  module KeyContentGenerator
       def self.generate(content)
         content = substitute_variables(content)
       end

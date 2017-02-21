@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::KeyContent do
-  subject = LazyTranslate::KeyContent
+describe LazyTranslate::KeyContentGenerator do
+  subject = LazyTranslate::KeyContentGenerator
 
   tests = [
     {

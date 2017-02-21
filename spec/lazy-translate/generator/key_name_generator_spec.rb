@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::KeyName do
-  subject = LazyTranslate::KeyName
+describe LazyTranslate::KeyNameGenerator do
+  subject = LazyTranslate::KeyNameGenerator
 
   tests = [
     {
@@ -58,11 +58,5 @@ describe LazyTranslate::KeyName do
 
   describe '.generate' do
     check_input_output_comment(tests, subject.method(:generate))
-  end
-
-  describe '.key_content_hash' do
-    it 'returns hash of generated key name => content' do
-      expect(subject.key_content_hash("very rainy today!")).to eq({"very_rainy_today" => "very rainy today!"})
-    end
   end
 end
