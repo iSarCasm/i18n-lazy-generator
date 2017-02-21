@@ -1,37 +1,32 @@
 module LazyTranslate
   module KeyContentGenerator
-      def self.generate(content)
-        content = substitute_variables(content)
-      end
+    def self.generate(content)
+      content = substitute_erb(content)
+    end
 
-      private
+    private
 
-      def self.substitute_variables(text)
-        used_variables = []
-        LazyTranslate::ERB.substitute_erb_with(text) do |erb|
-          variable = erb_to_variable(erb)
-          YAML.variable collision_handled(variable, used_variables)
-        end
+    def self.substitute_erb(text)
+      used_variable_names = []
+      ERB.substitute_erb_with(text) do |erb|
+        YAML.variable collision_handled(erb_to_variable(erb), used_variable_names)
       end
+    end
 
-      def self.collision_handled(element, array)
-        new_element = element
-        suffix = 2
-        while array.include?(new_element)
-          new_element = element + suffix.to_s
-          suffix += 1
-        end
-        array << new_element
-        new_element
+    def self.collision_handled(variable_name, used_names)
+      new_variable_name = variable_name
+      suffix = 2
+      while used_names.include?(new_variable_name)
+        new_variable_name = variable_name + suffix.to_s
+        suffix += 1
       end
+      used_names << new_variable_name
+      new_variable_name
+    end
 
-      def self.erb_to_variable(erb)
-        erb = LazyTranslate::ERB.escape_tags(erb)
-        if LazyTranslate::ERB.link?(erb)
-          "link"
-        else
-          LazyTranslate::ERB.last_identifier(erb)
-        end
-      end
+    def self.erb_to_variable(erb)
+      erb = LazyTranslate::ERB.escape_tags(erb)
+      ERB.link?(erb) ? "link" : ERB.last_identifier(erb)
+    end
   end
 end

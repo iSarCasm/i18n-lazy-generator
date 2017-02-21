@@ -11,16 +11,16 @@ module LazyTranslate
 
     def self.parse(source_file, source_type)
       if source_type == :haml then
-        @elements = LazyTranslate::HAMLParser.parse_and_finalize(source_file)
+        @elements = HAMLParser.parse_and_finalize(source_file)
       end
     end
 
     def self.new_keys_hash(config, context, elements)
       elements.each.with_object({}) do |el, new_hash|
-        if el.class == LazyTranslate::TextElement then
+        if el.class == TextElement then
           key_content_pair = {
-            LazyTranslate::KeyNameGenerator.generate(el.content) =>
-            LazyTranslate::KeyContentGenerator.generate(el.content)
+            KeyNameGenerator.generate(el.content) =>
+            KeyContentGenerator.generate(el.content)
           }
           deep_store(new_hash, context, key_content_pair)
         end
