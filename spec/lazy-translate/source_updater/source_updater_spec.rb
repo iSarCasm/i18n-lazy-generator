@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LazyTranslate::SourceUpdater do
   subject = LazyTranslate::SourceUpdater
 
-  context '.run' do
+  context '.update_source' do
     before do
       @source_1 = <<-HAML
 #content
@@ -24,7 +24,7 @@ HAML
     end
 
     it 'returns updated source text' do
-      expect(subject.run(@source_1, :haml)).to eq @result_1
+      expect(subject.update_source(@source_1, :haml)).to eq @result_1
     end
   end
 end
