@@ -1,8 +1,12 @@
 require 'pry'
 module LazyTranslate
   module KeyName
+    def self.key_content_hash(content)
+      {generate(content) => content}
+    end
+
     def self.generate(content)
-      html_safety_control(content) do
+      make_unsafe_if_html_used(content) do
         content = LazyTranslate::ERB.substitute_erb_with(content) { |erb| erb_to_key(erb) }
         content = LazyTranslate::HTML.remove_html(content)
         content = to_snake_case(content)
@@ -12,10 +16,10 @@ module LazyTranslate
 
     private
 
-    def self.html_safety_control (content, &block)
-      should_add_html = LazyTranslate::HTML.contains_html?(content) || LazyTranslate::ERB.contains_link?(content)
+    def self.make_unsafe_if_html_used (content, &block)
+      should_make_unsafe = LazyTranslate::HTML.contains_html?(content) || LazyTranslate::ERB.contains_link?(content)
       content = block.call
-      should_add_html ? content + "_html" : content
+      should_make_unsafe ? content + "_html" : content
     end
 
     def self.to_snake_case(text)
