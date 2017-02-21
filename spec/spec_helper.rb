@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'i18n-lazy-generator'
+require 'lazy-translate'
 
 def check_matches(matches, proc)
   matches.each do |test, result|
