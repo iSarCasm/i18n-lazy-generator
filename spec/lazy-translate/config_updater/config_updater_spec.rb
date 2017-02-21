@@ -23,14 +23,14 @@ en:
 YAML
   end
 
-  describe '.run' do
+  describe '.updated_config' do
     it 'creates a new scope and puts key-content pairs inside' do
-      expect(subject.run(@source, :haml, @context, "")).to eq "---\nen:\n  main_page:\n    welcome_to_our_site: Welcome to our site!\n"
+      expect(subject.updated_config(@source, :haml, @context, "")).to eq "---\nen:\n  main_page:\n    welcome_to_our_site: Welcome to our site!\n"
 
     end
 
     it 'adds to existing scope and puts a key-content pairs inside' do
-      expect(subject.run(@source, :haml, @context, @yaml)).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
+      expect(subject.updated_config(@source, :haml, @context, @yaml)).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
     end
   end
 end
