@@ -1,6 +1,6 @@
 module LazyTranslate
   module YAML
-    def self.variable(name)
+    def self.embedded_variable(name)
       "%{#{name}}"
     end
   end

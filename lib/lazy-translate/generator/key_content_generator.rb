@@ -9,7 +9,7 @@ module LazyTranslate
     def self.substitute_erb(text)
       used_variable_names = []
       ERB.substitute_erb_with(text) do |erb|
-        YAML.variable collision_handled(erb_to_variable(erb), used_variable_names)
+        YAML.embedded_variable collision_handled(erb_to_variable(erb), used_variable_names)
       end
     end
 
@@ -25,7 +25,7 @@ module LazyTranslate
     end
 
     def self.erb_to_variable(erb)
-      erb = LazyTranslate::ERB.escape_tags(erb)
+      erb = ERB.escape_tags(erb)
       ERB.link?(erb) ? "link" : ERB.last_identifier(erb)
     end
   end
