@@ -7,7 +7,7 @@ module LazyTranslate
 
     def self.parse(data)
       elements = []
-      current = LazyTranslate::ParsedElement.new
+      current = ParsedElement.new
       index = 0
       while index != data.length do
         char = data[index]
@@ -18,7 +18,7 @@ module LazyTranslate
         end
         if current.finished? then
           elements << current
-          current = LazyTranslate::ParsedElement.new
+          current = ParsedElement.new
         end
         index += 1 if char_addded
       end
