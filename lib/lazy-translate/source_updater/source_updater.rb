@@ -23,8 +23,8 @@ module LazyTranslate
     end
 
     def self.join_elements_to_text(elements)
-      elements.each.with_object("") do |el, t|
-        t << el.content
+      elements.each.with_object("") do |el, text|
+        text << el.content
       end
     end
   end

@@ -3,9 +3,9 @@ require 'spec_helper'
 describe LazyTranslate::ERB do
   subject = LazyTranslate::ERB
 
-  describe '.substitute_erb_with' do
+  describe '.substitute_erb_in_text' do
     it 'enumerates on each erb tag' do
-      expect(subject.substitute_erb_with("Hello <%= there %>") do |content|
+      expect(subject.substitute_erb_in_text("Hello <%= there %>") do |content|
         content.reverse
       end).to eq "Hello #{'<%= there %>'.reverse}"
     end

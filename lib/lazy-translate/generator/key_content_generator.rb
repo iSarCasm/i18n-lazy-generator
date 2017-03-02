@@ -8,20 +8,21 @@ module LazyTranslate
 
     def self.substitute_erb(text)
       used_variable_names = []
-      ERB.substitute_erb_with(text) do |erb|
-        YAML.embedded_variable collision_handled(erb_to_variable(erb), used_variable_names)
+      ERB.substitute_erb_in_text(text) do |erb|
+        variable_name = collision_handled_name(erb_to_variable(erb), used_variable_names)
+        used_variable_names << variable_name
+        YAML.formatted_variable variable_name
       end
     end
 
-    def self.collision_handled(variable_name, used_names)
-      new_variable_name = variable_name
+    def self.collision_handled_name(desired_name, used_names)
+      unique_name = desired_name
       suffix = 2
-      while used_names.include?(new_variable_name)
-        new_variable_name = variable_name + suffix.to_s
+      while used_names.include?(unique_name)
+        unique_name = desired_name + suffix.to_s
         suffix += 1
       end
-      used_names << new_variable_name
-      new_variable_name
+      unique_name
     end
 
     def self.erb_to_variable(erb)
