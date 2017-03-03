@@ -1,6 +1,10 @@
 require 'pry'
 module LazyTranslate
   class Parser
+    def self.get_parser(type)
+      LazyTranslate.const_get(type.to_s.upcase+'Parser', true)
+    end
+
     def self.parser_elements
       []
     end
