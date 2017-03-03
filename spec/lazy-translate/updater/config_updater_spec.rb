@@ -23,14 +23,26 @@ en:
 YAML
   end
 
+  describe '.update' do
+    before do
+      @src_path = "source.haml"
+      @cfg_path = "config.yml"
+    end
+
+    it 'updates file as expected' do
+      binding.pry 
+      subject.update(source_path: @src_path, config_path: @cfg_path, context: @context)
+      expect(open_file(@cfg_path).read).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
+    end
+  end
+
   describe '.updated_config' do
     it 'creates a new scope and puts key-content pairs inside' do
-      expect(subject.updated_config(@source, :haml, @context, "")).to eq "---\nen:\n  main_page:\n    welcome_to_our_site: Welcome to our site!\n"
-
+      expect(subject.updated_config(@source, :haml, "", @context)).to eq "---\nen:\n  main_page:\n    welcome_to_our_site: Welcome to our site!\n"
     end
 
     it 'adds to existing scope and puts a key-content pairs inside' do
-      expect(subject.updated_config(@source, :haml, @context, @yaml)).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
+      expect(subject.updated_config(@source, :haml, @yaml, @context)).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
     end
   end
 end

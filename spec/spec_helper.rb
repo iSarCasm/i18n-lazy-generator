@@ -16,3 +16,14 @@ def check_input_output_comment(tests, proc)
     end
   end
 end
+
+def open_file(path, options)
+  copy_test_file(path)
+  File.open("./tmp/#{path}", options)
+end
+require 'pry'
+def copy_test_file(path)
+  binding.pry
+  copy = File.open("./env/#{path}", 'rb')
+  File.open("./tmp/#{path}", 'w') { |wr_f| wr_f.write(copy.read) }
+end

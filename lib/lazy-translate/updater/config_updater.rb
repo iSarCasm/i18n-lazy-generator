@@ -1,10 +1,11 @@
 module LazyTranslate
   module ConfigUpdater
     def self.update(source_path: nil, config_path: nil, context: nil)
-      data        = File.open(path, 'rb').read
-      data_format = path.split('.').last
-      new_data    = updated_config(data, data_format)
-      File.open(path, 'w') { |f| f.write(new_data) }
+      src_data        = File.open(source_path, 'rb').read
+      src_data_format = path.split('.').last
+      cfg_data        = File.open(config_path, 'rb').read
+      new_data        = updated_config(src_data, src_data_format, cfg_data, context)
+      File.open(config_path, 'w') { |f| f.write(new_data) }
     end
 
     def self.updated_config(source_text, source_type, config_text, context)
