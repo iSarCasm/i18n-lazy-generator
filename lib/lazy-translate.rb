@@ -4,9 +4,8 @@ require "lazy-translate/version"
 
 require "lazy-translate/cli"
 
-require "lazy-translate/source_updater/source_updater"
-require "lazy-translate/config_updater/config_updater"
-
+require "lazy-translate/updater/source_updater"
+require "lazy-translate/updater/config_updater"
 
 require "lazy-translate/generator/key_name_generator"
 require "lazy-translate/generator/key_content_generator"
