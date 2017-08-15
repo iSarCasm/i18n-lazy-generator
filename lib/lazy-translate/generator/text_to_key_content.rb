@@ -1,7 +1,7 @@
 module LazyTranslate
-  module KeyContentGenerator
-    def self.generate(content)
-      content = substitute_erb(content)
+  module TextToKeyContent
+    def self.convert(content)
+      substitute_erb content
     end
 
     private

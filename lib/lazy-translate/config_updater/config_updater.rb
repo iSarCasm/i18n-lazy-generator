@@ -20,7 +20,7 @@ module LazyTranslate
         if el.class == TextElement then
           key_content_pair = {
             KeyNameGenerator.generate(el.content) =>
-            KeyContentGenerator.generate(el.content)
+            TextToKeyContent.convert(el.content)
           }
           deep_store(new_hash, context, key_content_pair)
         end
