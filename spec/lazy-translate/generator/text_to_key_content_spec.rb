@@ -41,7 +41,7 @@ describe LazyTranslate::TextToKeyContent do
     }
   ]
 
-  describe '.generate' do
-    check_input_output_comment(tests, subject.method(:generate))
+  describe '.convert' do
+    check_input_output_comment(tests, subject.method(:convert))
   end
 end

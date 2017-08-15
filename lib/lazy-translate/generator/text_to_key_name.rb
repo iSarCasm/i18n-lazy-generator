@@ -1,11 +1,11 @@
 module LazyTranslate
-  module KeyNameGenerator
-    def self.generate(content)
+  module TextToKeyName
+    def self.convert(content)
       make_unsafe_if_html_used(content) do
         content = ERB.substitute_erb_with(content) { |erb| erb_to_key(erb) }
         content = HTML.remove_html(content)
         content = to_snake_case(content)
-        content = restrict_word_count(text: content, words: 5)
+        restrict_word_count(text: content, words: 5)
       end
     end
 

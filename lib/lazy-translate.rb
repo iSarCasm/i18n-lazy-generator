@@ -8,7 +8,7 @@ require "lazy-translate/source_updater/source_updater"
 require "lazy-translate/config_updater/config_updater"
 
 
-require "lazy-translate/generator/key_name_generator"
+require "lazy-translate/generator/text_to_key_name"
 require "lazy-translate/generator/text_to_key_content"
 
 require "lazy-translate/parser/parser"

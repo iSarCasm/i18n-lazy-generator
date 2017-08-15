@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::KeyNameGenerator do
-  subject = LazyTranslate::KeyNameGenerator
+describe LazyTranslate::TextToKeyName do
+  subject = LazyTranslate::TextToKeyName
 
   tests = [
     {
@@ -56,7 +56,7 @@ describe LazyTranslate::KeyNameGenerator do
     }
   ]
 
-  describe '.generate' do
-    check_input_output_comment(tests, subject.method(:generate))
+  describe '.convert' do
+    check_input_output_comment(tests, subject.method(:convert))
   end
 end
