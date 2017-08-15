@@ -1,5 +1,12 @@
 module LazyTranslate
   module SourceUpdater
+    def self.update(path)
+      data        = File.open(path, 'rb').read
+      data_format = path.split('.').last
+      new_data    = update_source(data, data_format)
+      File.open(path, 'w') { |f| f.write(new_data) }
+    end
+
     def self.update_source(source_text, source_type)
       parsed_elements = parse(source_text, source_type)
       parsed_elements = substitute_text_with_keys(parsed_elements)
@@ -9,9 +16,7 @@ module LazyTranslate
     private
 
     def self.parse(source_file, source_type)
-      if source_type == :haml then
-        LazyTranslate::HAMLParser.parse_and_finalize(source_file)
-      end
+      Parser.get_parser(source_type).parse_and_finalize(source_file)
     end
 
     def self.substitute_text_with_keys(elements)
@@ -23,8 +28,8 @@ module LazyTranslate
     end
 
     def self.join_elements_to_text(elements)
-      elements.each.with_object("") do |el, t|
-        t << el.content
+      elements.each.with_object("") do |el, text|
+        text << el.content
       end
     end
   end

@@ -1,6 +1,6 @@
 module LazyTranslate
   module ERB
-    def self.substitute_erb_with(text, &block)
+    def self.substitute_erb_in_text(text, &block)
       text.gsub(/(<%=.+?%>)/) { block.call($1) }
     end
 
