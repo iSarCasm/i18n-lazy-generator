@@ -2,7 +2,7 @@ module LazyTranslate
   module ConfigUpdater
     def self.update(source_path: nil, config_path: nil, context: nil)
       src_data        = File.open(source_path, 'rb').read
-      src_data_format = path.split('.').last
+      src_data_format = source_path.split('.').last
       cfg_data        = File.open(config_path, 'rb').read
       new_data        = updated_config(src_data, src_data_format, cfg_data, context)
       File.open(config_path, 'w') { |f| f.write(new_data) }
@@ -26,7 +26,7 @@ module LazyTranslate
         if el.class == TextElement then
           key_content_pair = {
             TextToKeyName.convert(el.content) =>
-            TextToKeyContent.convert(el.content)
+            TextToKeyContent.convert(ErbReader, el.content).content
           }
           deep_store(new_hash, context, key_content_pair)
         end

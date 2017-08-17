@@ -5,38 +5,53 @@ describe LazyTranslate::TextToKeyContent do
 
   tests = [
     {
-      input:    "it is rainy today",
-      output:   'it is rainy today',
+      input:    [LazyTranslate::ErbReader, "it is rainy today"],
+      output:   LazyTranslate::KeyContent.new('it is rainy today'),
       comment:  "just a simple line of text"
     },
     {
-      input:    "it is <strong>rainy</strong> today<br> wow.",
-      output:   'it is <strong>rainy</strong> today<br> wow.',
+      input:    [LazyTranslate::ErbReader, "it is <strong>rainy</strong> today<br> wow."],
+      output:   LazyTranslate::KeyContent.new('it is <strong>rainy</strong> today<br> wow.'),
       comment:  "text with html tags"
     },
     {
-      input:    "it is rainy <%= Time.now.day %>.",
-      output:   'it is rainy %{day}.',
+      input:    [LazyTranslate::ErbReader, "it is rainy <%= Time.now.day %>."],
+      output:   LazyTranslate::KeyContent.new('it is rainy %{day}.', {'day' => 'Time.now.day'}),
       comment:  "text with erb tags"
     },
     {
-      input:    "It is rainy <%= link_to('today', 'today.com') %>.",
-      output:   'It is rainy %{link}.',
+      input:    [LazyTranslate::ErbReader, "It is rainy <%= link_to('today', 'today.com') %>."],
+      output:   LazyTranslate::KeyContent.new('It is rainy %{link}.', {'link' => "link_to('today', 'today.com')"}),
       comment:  "text with erb link"
     },
     {
-      input:    "It is rainy <%= link_to('today', 'today.com') %> (go <%= link_to('check', 'google.com/weather') %>)",
-      output:   'It is rainy %{link} (go %{link2})',
+      input:    [LazyTranslate::ErbReader, "It is rainy <%= link_to('today', 'today.com') %> (go <%= link_to('check', 'google.com/weather') %>)"],
+      output:   LazyTranslate::KeyContent.new(
+                  'It is rainy %{link} (go %{link2})',
+                  {'link' => "link_to('today', 'today.com')", 'link2' => "link_to('check', 'google.com/weather')"}
+                ),
       comment:  "text with multiple erb links"
     },
     {
-      input:    "it is rainy <%= Time.now.day %> or <%= Time.now.day %>.",
-      output:   'it is rainy %{day} or %{day2}.',
+      input:    [LazyTranslate::ErbReader, "it is rainy <%= Time.now.day %> or <%= Time.now.day %>."],
+      output:   LazyTranslate::KeyContent.new(
+                  'it is rainy %{day} or %{day2}.',
+                  {'day' => 'Time.now.day', 'day2' => 'Time.now.day'}
+                ),
       comment:  "text with 1 variable name collision"
     },
     {
-      input:    "it is rainy <%= Time.now.day %> or <%= Time.now.day %> or <%= Time.now.day %>. <%= alert %> <%= alert %>",
-      output:   'it is rainy %{day} or %{day2} or %{day3}. %{alert} %{alert2}',
+      input:    [LazyTranslate::ErbReader, "it is rainy <%= Time.now.day %> or <%= Time.now.day %> or <%= Time.now.day %>. <%= alert %> <%= alert %>"],
+      output:   LazyTranslate::KeyContent.new(
+                  'it is rainy %{day} or %{day2} or %{day3}. %{alert} %{alert2}',
+                  {
+                    'day' => 'Time.now.day',
+                    'day2' => 'Time.now.day',
+                    'day3' => 'Time.now.day',
+                    'alert' => 'alert',
+                    'alert2' => 'alert'
+                  }
+                ),
       comment:  "text with multple variable name collision"
     }
   ]

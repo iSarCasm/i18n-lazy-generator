@@ -1,19 +1,16 @@
 module LazyTranslate
   module TextToKeyContent
-    def self.convert(content)
-      substitute_erb content
+    def self.convert(source_class, content)
+      variables = {}
+      content = source_class.substitute_vars_in_text(content) do |ruby_code|
+        variable_name = collision_handled_name(ruby_to_variable(source_class, ruby_code), variables)
+        variables[variable_name] = source_class.extract_var ruby_code
+        YAML.formatted_variable variable_name
+      end
+      KeyContent.new(content, variables)
     end
 
     private
-
-    def self.substitute_erb(text)
-      used_variable_names = []
-      ERB.substitute_erb_in_text(text) do |erb|
-        variable_name = collision_handled_name(erb_to_variable(erb), used_variable_names)
-        used_variable_names << variable_name
-        YAML.formatted_variable variable_name
-      end
-    end
 
     def self.collision_handled_name(desired_name, used_names)
       unique_name = desired_name
@@ -25,9 +22,9 @@ module LazyTranslate
       unique_name
     end
 
-    def self.erb_to_variable(erb)
-      erb = ERB.escape_tags(erb)
-      ERB.link?(erb) ? "link" : ERB.last_identifier(erb)
+    def self.ruby_to_variable(source_class, ruby_code)
+      ruby_code = source_class.escape_tags(ruby_code)
+      source_class.link?(ruby_code) ? "link" : source_class.last_identifier(ruby_code)
     end
   end
 end

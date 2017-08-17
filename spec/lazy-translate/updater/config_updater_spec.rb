@@ -25,14 +25,13 @@ YAML
 
   describe '.update' do
     before do
-      @src_path = "source.haml"
-      @cfg_path = "config.yml"
+      @src_path = env_file "source.haml"
+      @cfg_path = env_file "config.yml"
     end
 
     it 'updates file as expected' do
-      binding.pry 
       subject.update(source_path: @src_path, config_path: @cfg_path, context: @context)
-      expect(open_file(@cfg_path).read).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
+      expect(File.open(@cfg_path).read).to eq "---\nen:\n  some_key: some text\n  main_page:\n    some_stuff: some other suff\n    welcome_to_our_site: Welcome to our site!\n  other_page:\n    other_stuff: some another stuff\n"
     end
   end
 

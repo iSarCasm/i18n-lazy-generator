@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'lazy-translate'
+require 'pry'
 
 def check_matches(matches, proc)
   matches.each do |test, result|
@@ -17,13 +18,13 @@ def check_input_output_comment(tests, proc)
   end
 end
 
-def open_file(path, options)
+def env_file(path, options = {})
   copy_test_file(path)
-  File.open("./tmp/#{path}", options)
+  "#{File.dirname(__FILE__)}/tmp/#{path}"
+  # File.open("./tmp/#{path}", options)
 end
-require 'pry'
+
 def copy_test_file(path)
-  binding.pry
-  copy = File.open("./env/#{path}", 'rb')
-  File.open("./tmp/#{path}", 'w') { |wr_f| wr_f.write(copy.read) }
+  copy = File.open("#{File.dirname(__FILE__)}/env/#{path}", 'rb')
+  File.open("#{File.dirname(__FILE__)}/tmp/#{path}", 'w') { |wr_f| wr_f.write(copy.read) }
 end

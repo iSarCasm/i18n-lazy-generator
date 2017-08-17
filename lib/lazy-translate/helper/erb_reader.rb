@@ -1,7 +1,13 @@
 module LazyTranslate
-  module ERB
-    def self.substitute_erb_in_text(text, &block)
+  class ErbReader < SourceFileReader
+    def self.substitute_vars_in_text(text, &block)
       text.gsub(/(<%=.+?%>)/) { block.call($1) }
+    end
+
+    def self.extract_var(var_text)
+      var_text
+        .gsub(/((<%=)|(%>))/, '')   # remove tags
+        .gsub(/(^\s+)|(\s+$)/, '')  # remove whitespaces in front and end
     end
 
     def self.escape_tags(text)
