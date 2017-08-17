@@ -6,7 +6,6 @@
 /doc/
 /pkg/
 /spec/reports/
-/tmp/**/*
-!/tmp/.keep
-!/tmp/
-/spec/tmp/
+tmp/*
+spec/tmp/*
+!spec/tmp/.keep
