@@ -1,7 +1,8 @@
 require 'yaml'
 require 'deep_merge'
-require "lazy-translate/version"
 
+require "lazy-translate/version"
+require "lazy-translate/translator"
 require "lazy-translate/cli"
 
 require "lazy-translate/updater/source_updater"
