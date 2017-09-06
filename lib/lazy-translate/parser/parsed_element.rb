@@ -1,6 +1,6 @@
 module LazyTranslate
   class ParsedElement
-    attr_reader :start, :end
+    attr_reader :start, :finish
     attr_accessor :content
 
     def initialize
@@ -15,7 +15,7 @@ module LazyTranslate
     def add(char, index, transitions)
       @start    = index if @content.empty?
       @content  += char
-      @end      = index if finished?
+      @finish   = index if finished?
       new_self = nil
       transitions.each do |t|
         new_self ||= t.transition self
@@ -27,8 +27,8 @@ module LazyTranslate
       @content
     end
 
-    def finish index
-      @end      = index
+    def finish! index
+      @finish   = index
       @finished = true
     end
 

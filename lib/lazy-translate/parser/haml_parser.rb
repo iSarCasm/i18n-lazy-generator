@@ -10,8 +10,10 @@ module LazyTranslate
     end
 
     def self.finalize(elements)
-      elements.map do |e|
-        (e.class == HamlTextElement ? TextElement.new(e) : e)
+      elements.keep_if do |e|
+        e.class == HamlTextElement
+      end.map do |e|
+        TextElement.new(parsed_element: e)
       end
     end
   end

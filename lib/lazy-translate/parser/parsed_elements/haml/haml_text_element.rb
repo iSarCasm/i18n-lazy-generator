@@ -3,14 +3,14 @@ module LazyTranslate
     def initialize parsed_element
       @content = parsed_element.content
       @start   = parsed_element.start
-      @end     = parsed_element.end
+      @finish  = parsed_element.finish
     end
 
     def can_add? char, index
       if char != "\n" then
         true
       else
-        finish index-1
+        finish! index-1
         false
       end
     end

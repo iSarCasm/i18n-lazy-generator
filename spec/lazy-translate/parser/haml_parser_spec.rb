@@ -15,9 +15,9 @@ describe LazyTranslate::HAMLParser do
   end
 
   describe '.parse' do
-    context 'returns Array of Elements' do
+    context 'returns Array of TextElements' do
       it do
-        expect(subject.parse(@haml_1).map{|x| x.content}).to eq [
+        expect(subject.parse(@haml_1).map{|x| x.content}).to contain_exactly(
           "#content\n",
           "  ",
           ".left.column\n",
@@ -31,7 +31,7 @@ describe LazyTranslate::HAMLParser do
           "    ",
           "= render :partial => \"sidebar\"",
           "\n"
-        ]
+        )
       end
     end
   end
@@ -39,21 +39,9 @@ describe LazyTranslate::HAMLParser do
   describe '.parse_and_finalize' do
     context 'returns Array of Elements' do
       it do
-        expect(subject.parse_and_finalize(@haml_1).map{|x| x.content}).to eq [
-          "#content\n",
-          "  ",
-          ".left.column\n",
-          "    ",
-          "%h2", " ",
-          "Welcome to our site!",
-          "\n    ",
-          "%p", "= print_information",
-          "\n  ",
-          ".right.column\n",
-          "    ",
-          "= render :partial => \"sidebar\"",
-          "\n"
-        ]
+        expect(subject.parse_and_finalize(@haml_1)).to contain_exactly(
+          LazyTranslate::TextElement.new(content: "Welcome to our site!", start: 32, finish: 51),
+        )
       end
     end
   end
