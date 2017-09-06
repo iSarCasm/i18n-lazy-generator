@@ -1,8 +1,28 @@
 The end goal workflow of the gem:
-  1.  - "i18n-lazy-generator generate [file path] [--interactive] [--no-common]"
-        - ask config path
-        - ask context
-  2.  - "i18n-lazy-generator rename [file path] [key] [new name]"
-  3.  - "i18n-lazy-generator delete [file path] [key]"
-  4.  - "i18n-lazy-generator common [file path] [key]"
-  5.  - "i18n-lazy-generator uncommon [file path] [key]"
+- "lazy-translate [source path] [config_path]
+
+
+1.
+  %p Some text
+2.
+  %p
+    Some long long
+    long long text
+3.
+  %p
+    Some long
+    %strong text
+    with
+    %em some html
+4.
+  %p
+    Some text
+    = some_var
+    with variables
+5.
+  %p
+    = link_to('Text inside link', path)
+    = image_tag 'Text inside any call', img
+6.
+  %p
+    img{alt: 'Text inside attributes'}
