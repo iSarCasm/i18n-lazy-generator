@@ -4,7 +4,7 @@ describe LazyTranslate::TranslationElement do
   subject = LazyTranslate::TranslationElement
 
   context '#apply' do
-    let(:translation_element) { subject.new(translation: 'TRANSLATED', start: 3, finish: 12) }
+    let(:translation_element) { subject.new(translation: 'TRANSLATED', start: 3, finish: 11) }
     let(:text) { "%p Some Text field" }
 
     it 'returns text with applied translation' do

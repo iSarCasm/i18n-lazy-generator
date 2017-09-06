@@ -21,7 +21,7 @@ module LazyTranslate
     private
 
     def remove_old_text_part(text)
-      text[0...start] + text[finish..-1]
+      text[0...start] + text[finish+1..-1]
     end
 
     def add_translation_part(text)
