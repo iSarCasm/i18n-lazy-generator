@@ -1,5 +1,6 @@
 require 'yaml'
 require 'deep_merge'
+require 'diffy'
 
 require "lazy-translate/version"
 require "lazy-translate/translator"
