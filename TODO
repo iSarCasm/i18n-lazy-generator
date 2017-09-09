@@ -45,8 +45,12 @@ The end goal workflow of the gem:
 
 7. Output ConfigHashAppendix, Source file diff. Prompt for write\copy.
 
-8. Rubocop
+8. HAML Parser (Haml::Parser => TextElements)
 
-9. More args
+9. ERB Parser
 
-10. License, Readme, Travis, Codeclimate
+10. Rubocop
+
+11. More args
+
+12. License, Readme, Travis, Codeclimate
