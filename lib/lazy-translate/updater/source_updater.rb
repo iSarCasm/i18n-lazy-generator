@@ -1,12 +1,6 @@
 module LazyTranslate
   module SourceUpdater
-    def self.update(path)
-      data        = File.open(path, 'rb').read
-      data_format = path.split('.').last
-      new_data    = update_source(data, data_format)
-    end
-
-    def self.update_source(source_text, source_type)
+    def self.update(source_text, source_type)
       text_elements = parse(source_text, source_type)
       translation_elements = make_translation_elements(text_elements)
       apply_translations(translation_elements, source_text)

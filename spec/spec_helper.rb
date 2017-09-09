@@ -18,13 +18,16 @@ def check_input_output_comment(tests, proc)
   end
 end
 
+def read_env_file(path, options = {})
+  File.read env_file(path, options)
+end
+
 def env_file(path, options = {})
   copy_test_file(path)
   "#{File.dirname(__FILE__)}/tmp/#{path}"
-  # File.open("./tmp/#{path}", options)
 end
 
 def copy_test_file(path)
   copy = File.open("#{File.dirname(__FILE__)}/env/#{path}", 'rb')
-  File.open("#{File.dirname(__FILE__)}/tmp/#{path}", 'w') { |wr_f| wr_f.write(copy.read) }
+  File.open("#{File.dirname(__FILE__)}/tmp/#{path}", 'w+') { |wr_f| wr_f.write(copy.read) }
 end
