@@ -16,7 +16,7 @@ module LazyTranslate
       while index != data.length do
         char = data[index]
         char_addded = false
-        if current.can_add? char, index then
+        if current.can_add? char, index
           current = current.add char, index, self.parser_elements
           char_addded = true
         end

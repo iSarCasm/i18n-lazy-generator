@@ -4,7 +4,7 @@ module LazyTranslate
       data        = File.open(path, 'rb').read
       data_format = path.split('.').last
       new_data    = update_source(data, data_format)
-      File.open(path, 'w') { |f| f.write(new_data) }
+      # File.open(path, 'w') { |f| f.write(new_data) }
     end
 
     def self.update_source(source_text, source_type)
@@ -26,7 +26,7 @@ module LazyTranslate
     end
 
     def self.translate(text)
-      "=t('.#{TextToKeyName.convert(text)}')"
+      "= t('.#{TextToKeyName.convert(text)}')"
     end
 
     def self.apply_translations(translations, text)
