@@ -27,3 +27,5 @@ require "lazy-translate/helper/source_file_reader"
 require "lazy-translate/helper/erb_reader"
 require "lazy-translate/helper/html"
 require "lazy-translate/helper/yaml"
+
+require "lazy-translate/parser/haml/parser"
