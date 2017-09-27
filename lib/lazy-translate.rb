@@ -6,6 +6,8 @@ require "lazy-translate/version"
 require "lazy-translate/translator"
 require "lazy-translate/cli"
 
+require "lazy-translate/to_file_type"
+
 require "lazy-translate/updater/source_updater"
 require "lazy-translate/updater/config_updater"
 

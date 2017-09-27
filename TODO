@@ -33,17 +33,17 @@ The end goal workflow of the gem:
    ToSourceFileType.from_path
    ToConfigFileType.from_path
 
-2. Reorder folders and files
+2. ConfigHashAppendix, ConfigUpdater(hash, file)
 
-3. Complex HAML parser tasks
+3. SourceUpdater(text, text_elements, file_type)
 
-4. ConfigHashAppendix, ConfigUpdater(hash, file)
+4. SourceFileReader(text, type) => ConfigHashAppendix(key_name => key_content), TextElements
 
-5. SourceUpdater(text, text_elements, file_type)
+5. Output ConfigHashAppendix, Source file diff. Prompt for write\copy.
 
-6. SourceFileReader(text, type) => ConfigHashAppendix(key_name => key_content), TextElements
+6. Reorder folders and files
 
-7. Output ConfigHashAppendix, Source file diff. Prompt for write\copy.
+7. Complex HAML parser tasks
 
 8. HAML Parser (Haml::Parser => TextElements)
 
