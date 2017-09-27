@@ -8,6 +8,8 @@ require "lazy-translate/cli"
 
 require "lazy-translate/to_file_type"
 
+require "lazy-translate/writers/config_writers/yaml_config_writer"
+
 require "lazy-translate/updater/source_updater"
 require "lazy-translate/updater/config_updater"
 
