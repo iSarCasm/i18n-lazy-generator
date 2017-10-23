@@ -2,18 +2,22 @@ module LazyTranslate
   module Translator
     def self.translate(source_path: nil, config_path: nil, context: nil)
       source_content  = File.read(source_path)
-      source_format   = ToFileType.from_path(source_path)
+      source_filetype = ToFileType.from_path(source_path)
+      source_parser = source_filetype.source_parser
+      new_translations = source_parser.parse source_content
 
       config_content  = File.read(config_path)
-      config_format   = ToFileType.from_path(config_path)
+      config_filetype = ToFileType.from_path(config_path)
+      config_parser = config_filetype.config_parser
+      config_hash   = config_parser.parse config_content
 
-      new_translations = SourceParser.parse(source_content, source_format)
-      config_hash      = ConfigParser.parse(config_content, config_format-)
+      source_updater      = source_filetype.source_updater
+      new_source_content  = source_updater.update source_content, new_translations
 
-      new_source = SourceWriter.update(source_content, source_format)
-      new_config = ConfigUpdater.update({}, config_content, config_format)
+      config_updater      = config_filetype.config_updater
+      new_config_content  = config_updater.update config_hash, new_translations
 
-      puts Diffy::Diff.new(read_source, new_source).to_s(:color)
+      puts Diffy::Diff.new(source_content, new_source_content).to_s(:color)
       puts 'Want to save the changes? (y/n)'
       confirmed_changes = $stdin.gets.chomp.downcase == 'y'
       File.open(source_path, 'w') { |f| f.write(new_source) } if confirmed_changes
