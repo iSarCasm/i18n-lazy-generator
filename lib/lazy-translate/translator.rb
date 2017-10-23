@@ -9,7 +9,6 @@ module LazyTranslate
       config_content  = File.read(config_path)
       config_filetype = FileType.new config_path
       config_parser = config_filetype.config_parser.new
-      binding.pry
       config_hash   = config_parser.parse config_content
 
       source_updater      = source_filetype.source_updater.new
