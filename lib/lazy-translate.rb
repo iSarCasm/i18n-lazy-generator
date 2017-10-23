@@ -6,18 +6,22 @@ require "lazy-translate/version"
 require "lazy-translate/translator"
 require "lazy-translate/cli"
 
-require "lazy-translate/to_file_type"
+require "lazy-translate/file_type"
 
 require "lazy-translate/writers/config_writers/yaml_config_writer"
 
 require "lazy-translate/updater/source_updater"
 require "lazy-translate/updater/config_updater"
+require "lazy-translate/updater/source_updater_haml"
+require "lazy-translate/updater/config_updater_yml"
 
 require "lazy-translate/generator/key_content"
 require "lazy-translate/generator/text_to_key_name"
 require "lazy-translate/generator/text_to_key_content"
 
 require "lazy-translate/parser/parser"
+require "lazy-translate/parser/config_parser_yml"
+require "lazy-translate/parser/source_parser_haml"
 require "lazy-translate/parser/haml_parser"
 require "lazy-translate/parser/parsed_element"
 require "lazy-translate/parser/parsed_elements/text_element"
