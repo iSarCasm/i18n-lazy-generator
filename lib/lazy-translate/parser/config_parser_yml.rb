@@ -1,7 +1,8 @@
 module LazyTranslate
   class ConfigParserYML
     def parse(content)
-      ::YAML.load(content).to_h
+      loaded = ::YAML.load(content) || {}
+      loaded.to_h
     end
   end
 end
