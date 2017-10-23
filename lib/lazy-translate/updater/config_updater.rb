@@ -1,9 +1,10 @@
 module LazyTranslate
   module ConfigUpdater
-    def update(hash, file, type)
-      file = File.open(file, 'rb').read
+    def update(new_translations, content, type)
+      config_parser = LazyTranslate.const_get(type.to_s.upcase+'ConfigWriter', true).new(file)
       config_writer = LazyTranslate.const_get(type.to_s.upcase+'ConfigWriter', true).new(file)
-      config_writer.write_keys(reverse_hash)
+      config_hash = config_parser.parse content
+      config_writer.add_translations(hash: config_hash, translations: new_translations)
     end
 
     # def self.update(source_path: nil, config_path: nil, context: nil)
