@@ -3,18 +3,18 @@ module LazyTranslate
     def self.translate(source_path: nil, config_path: nil, context: nil)
       source_content  = File.read(source_path)
       source_filetype = FileType.new source_path
-      source_parser = source_filetype.source_parser
+      source_parser = source_filetype.source_parser.new
       new_translations = source_parser.parse source_content
 
       config_content  = File.read(config_path)
       config_filetype = FileType.new config_path
-      config_parser = config_filetype.config_parser
+      config_parser = config_filetype.config_parser.new
       config_hash   = config_parser.parse config_content
 
-      source_updater      = source_filetype.source_updater
+      source_updater      = source_filetype.source_updater.new
       new_source_content  = source_updater.update source_content, new_translations
 
-      config_updater      = config_filetype.config_updater
+      config_updater      = config_filetype.config_updater.new
       new_config_content  = config_updater.update config_hash, new_translations
 
       puts Diffy::Diff.new(source_content, new_source).to_s(:color)
