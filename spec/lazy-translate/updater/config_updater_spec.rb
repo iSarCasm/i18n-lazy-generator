@@ -26,11 +26,11 @@ YAML
   describe '.update' do
     before do
       @config_hash = {
-        en: {
-          some_key: 'Some key!',
-          some_other: {
-            one: 'One',
-            two: 'Two'
+        'en' => {
+          'some_key' => 'Some key!',
+          'some_other' => {
+            'one' => 'One',
+            'two' => 'Two'
           }
         }
       }
@@ -39,16 +39,16 @@ YAML
         LazyTranslate::TranslationElement.new(translation: 'some text', start: nil, finish: nil),
         LazyTranslate::TranslationElement.new(translation: 'something else', start: nil, finish: nil)
       ]
-      @context = [:en, :some_other]
+      @context = ['en', 'some_other']
       @result = {
-        en: {
-          some_key: 'Some key!',
-          some_other: {
-            one: 'One',
-            two: 'Two',
-            a_new_translation: 'a new translation',
-            some_text: 'some text',
-            something_else: 'something else'
+        'en' => {
+          'some_key' => 'Some key!',
+          'some_other' => {
+            'one' => 'One',
+            'two' => 'Two',
+            'a_new_translation' => 'a new translation',
+            'some_text' => 'some text',
+            'something_else' => 'something else'
           }
         }
       }

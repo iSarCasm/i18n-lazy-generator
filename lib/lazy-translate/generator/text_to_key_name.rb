@@ -6,7 +6,7 @@ module LazyTranslate
         content = HTML.remove_html(content)
         content = to_snake_case(content)
         restrict_word_count(text: content, words: 5)
-      end.to_sym
+      end
     end
 
     private

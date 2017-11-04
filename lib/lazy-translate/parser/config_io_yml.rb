@@ -6,7 +6,8 @@ module LazyTranslate
     end
 
     def compose(hash)
-      
+      text = ::YAML.dump(hash)
+      text.split("\n").drop(1).join("\n") + "\n"
     end
   end
 end
