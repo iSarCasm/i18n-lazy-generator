@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::ConfigParserYML do
-  subject = LazyTranslate::ConfigParserYML
+describe LazyTranslate::ConfigIO_YML do
+  subject = LazyTranslate::ConfigIO_YML
 
   describe '#parse' do
     before do

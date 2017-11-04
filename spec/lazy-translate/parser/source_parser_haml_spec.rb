@@ -15,7 +15,7 @@ describe LazyTranslate::SourceParserHAML do
       HAML
     end
 
-    it 'converts HAML file to TranslationElements' do
+    xit 'converts HAML file to TranslationElements' do
       expect(subject.new.parse(@haml_1)).to contain_exactly(
         LazyTranslate::TextElement.new(content: "Welcome to our site!", start: 32, finish: 51),
       )

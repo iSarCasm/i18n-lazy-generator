@@ -6,7 +6,7 @@ module LazyTranslate
         content = HTML.remove_html(content)
         content = to_snake_case(content)
         restrict_word_count(text: content, words: 5)
-      end
+      end.to_sym
     end
 
     private
@@ -14,7 +14,7 @@ module LazyTranslate
     def self.make_unsafe_if_html_used (content, &block)
       should_make_unsafe = HTML.contains_html?(content) || ErbReader.contains_link?(content)
       key_name = block.call
-      should_make_unsafe ? key_name + "_html" : key_name
+      should_make_unsafe ? key_name + '_html' : key_name
     end
 
     def self.to_snake_case(text)

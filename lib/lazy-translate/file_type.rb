@@ -7,25 +7,19 @@ module LazyTranslate
     end
 
     def source_parser
-      LazyTranslate.const_get('SourceParser'+type.to_s.upcase, true)
+      get_class('SourceParser', type)
     end
 
-    def config_parser
-      LazyTranslate.const_get('ConfigParser'+type.to_s.upcase, true)
+    def config_io
+      get_class('ConfigIO_', type)
     end
 
     def source_updater
-      LazyTranslate.const_get('SourceUpdater'+type.to_s.upcase, true)
+      get_class('SourceUpdater', type)
     end
 
-    def config_updater
-      LazyTranslate.const_get('ConfigUpdater'+type.to_s.upcase, true)
-    end
-
-    private
-
-    def get_parser
-
+    def get_class(base, postfix)
+      LazyTranslate.const_get(base+postfix.to_s.upcase, true)
     end
   end
 end

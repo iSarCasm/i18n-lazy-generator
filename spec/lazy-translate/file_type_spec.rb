@@ -33,21 +33,15 @@ describe LazyTranslate::FileType do
     end
   end
 
-  describe '#config_parser' do
+  describe '#config_io' do
     it do
-      expect(subject.new('file.yml').config_parser).to eq LazyTranslate::ConfigParserYML
+      expect(subject.new('file.yml').config_io).to eq LazyTranslate::ConfigIO_YML
     end
   end
 
   describe '#source_updater' do
     it do
       expect(subject.new('file.haml').source_updater).to eq LazyTranslate::SourceUpdaterHAML
-    end
-  end
-
-  describe '#config_updater' do
-    it do
-      expect(subject.new('file.yml').config_updater).to eq LazyTranslate::ConfigUpdaterYML
     end
   end
 end
