@@ -28,22 +28,7 @@ The end goal workflow of the gem:
     img{alt: 'Text inside attributes'}
 
 
-1. ToFileType.for_source.from_path
-   ToFileType.for_config.from_path
-   ToSourceFileType.from_path
-   ToConfigFileType.from_path
-
-2. ConfigHashAppendix, ConfigUpdater(hash, file)
-
-3. SourceUpdater(text, text_elements, file_type)
-
-4. SourceFileReader(text, type) => ConfigHashAppendix(key_name => key_content), TextElements
-
-5. Output ConfigHashAppendix, Source file diff. Prompt for write\copy.
-
-6. Reorder folders and files
-
-7. Complex HAML parser tasks
+KeyName Collisions
 
 8. HAML Parser (Haml::Parser => TextElements)
 
