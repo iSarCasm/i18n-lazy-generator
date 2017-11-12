@@ -1,21 +1,25 @@
 module LazyTranslate
   class TranslationElement < TextElement
-    attr_reader :applied, :translation
+    attr_reader :original, :translation, :applied
 
-    def initialize(translation: , start: , finish: )
+    def initialize(original: nil, translation: nil, start: , finish: )
+      @original     = original
       @translation  = translation
       @start        = start
       @finish       = finish
       @applied      = false
     end
 
+    def translate_with(translation)
+      @translation = translation
+    end
+
     def apply_translation(text)
-      return text if applied
+      raise 'Translation not provided' unless translation
+      raise 'Translation already applied' if applied
       @applied = true
       new_text = remove_old_text_part(text)
       return add_translation_part(new_text)
-    rescue StandardError
-      text
     end
 
     private
