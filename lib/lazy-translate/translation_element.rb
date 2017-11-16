@@ -1,5 +1,5 @@
 module LazyTranslate
-  class TranslationElement < TextElement
+  class TranslationElement
     attr_reader :original, :applied, :line, :start, :finish
     attr_accessor :translation, :translation_key
 
