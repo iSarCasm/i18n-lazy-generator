@@ -12,6 +12,7 @@ require "lazy-translate/translation_element"
 require "lazy-translate/writers/yaml_config_writer"
 
 require "lazy-translate/updater/config_updater"
+require "lazy-translate/updater/source_updater"
 require "lazy-translate/updater/source_updater_haml"
 
 require "lazy-translate/generator/key_content"

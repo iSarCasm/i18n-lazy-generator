@@ -1,15 +1,16 @@
 module LazyTranslate
   class TranslationElement
-    attr_reader :original, :applied, :line, :start, :finish
+    attr_reader :original, :applied, :line, :start, :finish, :location
     attr_accessor :translation, :translation_key
 
-    def initialize(original: nil, translation: nil, translation_key: nil, line: , start: , finish: )
+    def initialize(line:, start:, finish:, location: nil, original: nil, translation: nil, translation_key: nil)
       @original     = original
       @translation  = translation
       @translation_key = translation_key
       @line         = line
       @start        = start
       @finish       = finish
+      @location     = location
       @applied      = false
     end
 

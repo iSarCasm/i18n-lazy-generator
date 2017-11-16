@@ -1,27 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::SourceUpdaterHAML do
-  subject = LazyTranslate::SourceUpdaterHAML
-
-  before do
-    @source = <<-HAML
-#content
-.left.column
-  %h2 Welcome to our site!
-  %p= print_information
-.right.column
-  = render :partial => "sidebar"
-HAML
-    @context  = "en/main_page"
-    @yaml     = <<-YAML
-en:
-  some_key: some text
-  main_page:
-    some_stuff: some other suff
-  other_page:
-    other_stuff: some another stuff
-YAML
-  end
+describe LazyTranslate::SourceUpdater do
+  subject = LazyTranslate::SourceUpdater
 
   describe '.update' do
     before do
@@ -42,11 +22,11 @@ YAML
       @result = <<~HAML
         #content
         .left.column
-          %h2= t('.welcome')
-          %p= t('.hello_world')
+          %h2welcome
+          %phello_world
           %p= print_information
         .right.column
-          = image_tag('icon.png', alt: t('.alternative_text'))
+          = image_tag('icon.png', alt: alternative_text)
       HAML
     end
 
