@@ -29,32 +29,29 @@ YAML
         #content
         .left.column
           %h2 Welcome to our site!
+          %p Hello world!
           %p= print_information
         .right.column
-          = render :partial => "sidebar"
+          = image_tag('icon.png', alt: 'alternative text')
       HAML
       @new_translations = [
-        LazyTranslate::TranslationElement.new(translation: 'a new translation', start: nil, finish: nil),
-        LazyTranslate::TranslationElement.new(translation: 'some text', start: nil, finish: nil),
-        LazyTranslate::TranslationElement.new(translation: 'something else', start: nil, finish: nil)
+        LazyTranslate::TranslationElement.new(translation_key: "= t('.welcome')", line: 2, start: 5, finish: 26),
+        LazyTranslate::TranslationElement.new(translation_key: "= t('.hello_world')", line: 3, start: 4, finish: 17),
+        LazyTranslate::TranslationElement.new(translation_key: "t('.alternative_text')", line: 6, start: 31, finish: 49)
       ]
-      @context = ['en', 'some_other']
-      @result = {
-        'en' => {
-          'some_key' => 'Some key!',
-          'some_other' => {
-            'one' => 'One',
-            'two' => 'Two',
-            'a_new_translation' => 'a new translation',
-            'some_text' => 'some text',
-            'something_else' => 'something else'
-          }
-        }
-      }
+      @result = <<~HAML
+        #content
+        .left.column
+          %h2= t('.welcome')
+          %p= t('.hello_world')
+          %p= print_information
+        .right.column
+          = image_tag('icon.png', alt: t('.alternative_text'))
+      HAML
     end
 
     it 'updates file as expected' do
-      expect(subject.update(@config_hash, @new_translations, @context)).to eq @result
+      expect(subject.update(@source, @new_translations)).to eq @result
     end
   end
 end
