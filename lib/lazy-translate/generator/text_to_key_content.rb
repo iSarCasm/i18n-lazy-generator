@@ -1,10 +1,10 @@
 module LazyTranslate
   module TextToKeyContent
-    def self.convert(source_class, content)
+    def self.convert(source_reader, content)
       variables = {}
-      content = source_class.substitute_vars_in_text(content) do |ruby_code|
-        variable_name = collision_handled_name(ruby_to_variable(source_class, ruby_code), variables)
-        variables[variable_name] = source_class.extract_var ruby_code
+      content = source_reader.substitute_vars_in_text(content) do |ruby_code|
+        variable_name = collision_handled_name(ruby_to_variable(source_reader, ruby_code), variables)
+        variables[variable_name] = source_reader.extract_var ruby_code
         YAML.formatted_variable variable_name
       end
       KeyContent.new(content, variables)
@@ -22,9 +22,9 @@ module LazyTranslate
       unique_name
     end
 
-    def self.ruby_to_variable(source_class, ruby_code)
-      ruby_code = source_class.escape_tags(ruby_code)
-      source_class.link?(ruby_code) ? "link" : source_class.last_identifier(ruby_code)
+    def self.ruby_to_variable(source_reader, ruby_code)
+      ruby_code = source_reader.escape_tags(ruby_code)
+      source_reader.link?(ruby_code) ? "link" : source_reader.last_identifier(ruby_code)
     end
   end
 end

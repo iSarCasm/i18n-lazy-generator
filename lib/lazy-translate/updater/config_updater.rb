@@ -2,7 +2,7 @@ module LazyTranslate
   module ConfigUpdater
     def self.update(config_hash, new_translations, context)
       new_translations.each do |t|
-        path = context.dup << TextToKeyName.convert(t.translation)
+        path = context.dup << t.translation_key
         hash_deep_store(config_hash, path, t.translation)
       end
       config_hash

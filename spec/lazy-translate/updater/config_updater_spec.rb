@@ -35,9 +35,9 @@ YAML
         }
       }
       @new_translations = [
-        LazyTranslate::TranslationElement.new(translation: 'a new translation', line: nil, start: nil, finish: nil),
-        LazyTranslate::TranslationElement.new(translation: 'some text', line: nil, start: nil, finish: nil),
-        LazyTranslate::TranslationElement.new(translation: 'something else', line: nil, start: nil, finish: nil)
+        LazyTranslate::TranslationElement.new(translation: 'a new translation', translation_key: 'a_new_translation', line: nil, start: nil, finish: nil),
+        LazyTranslate::TranslationElement.new(translation: 'some text', translation_key: 'some_text', line: nil, start: nil, finish: nil),
+        LazyTranslate::TranslationElement.new(translation: 'something else', translation_key: 'something_else', line: nil, start: nil, finish: nil)
       ]
       @context = ['en', 'some_other']
       @result = {
