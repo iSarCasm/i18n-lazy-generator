@@ -18,6 +18,12 @@ module LazyTranslate
       get_class('SourceUpdater', type)
     end
 
+    def reader
+      get_class('Reader', type)
+    end
+
+    private
+
     def get_class(base, postfix)
       LazyTranslate.const_get(base+postfix.to_s.upcase, true)
     end

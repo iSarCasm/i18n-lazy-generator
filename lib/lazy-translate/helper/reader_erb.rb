@@ -1,5 +1,5 @@
 module LazyTranslate
-  class ErbReader < SourceFileReader
+  class ReaderERB < SourceFileReader
     def self.substitute_vars_in_text(text, &block)
       text.gsub(/(<%=.+?%>)/) { block.call($1) }
     end

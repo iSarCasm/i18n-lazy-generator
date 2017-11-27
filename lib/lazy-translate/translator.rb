@@ -1,6 +1,6 @@
 module LazyTranslate
   module Translator
-    def self.translate(source_path: nil, config_path: nil, context: nil)
+    def self.translate(source_path: nil, config_path: nil, context_string: nil)
       source_content  = File.read(source_path)
       source_filetype = FileType.new source_path
       source_parser = source_filetype.source_parser.new
@@ -8,7 +8,7 @@ module LazyTranslate
 
       reader = source_filetype.reader
       new_translations.each { |t| t.translation = TextToKeyContent.convert(reader, t.original) }
-      new_translations.each { |t| t.translation_key = TextToKeyName.convert(t.translation) }
+      new_translations.each { |t| t.translation_key = TextToKeyName.convert(reader, t.translation.content) }
 
       source_updater      = source_filetype.source_updater.new
       new_source_content  = source_updater.update source_content, new_translations
@@ -18,7 +18,7 @@ module LazyTranslate
       config_io   = config_filetype.config_io.new
       config_hash = config_io.parse config_content
 
-      context = ContextBuilder.build(context)
+      context = ContextBuilder.build(context_string)
       new_config_hash     = ConfigUpdater.update config_hash, new_translations, context
       new_config_content  = config_io.compose new_config_hash
 

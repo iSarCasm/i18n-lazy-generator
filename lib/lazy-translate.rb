@@ -1,6 +1,7 @@
 require 'yaml'
 require 'deep_merge'
 require 'diffy'
+require 'pry'
 
 require "lazy-translate/version"
 require "lazy-translate/translator"
@@ -24,6 +25,7 @@ require "lazy-translate/config_io_yml"
 require "lazy-translate/parsers/source_parser_haml"
 
 require "lazy-translate/helper/source_file_reader"
-require "lazy-translate/helper/erb_reader"
+require "lazy-translate/helper/reader_erb"
+require "lazy-translate/helper/reader_haml"
 require "lazy-translate/helper/html"
 require "lazy-translate/helper/yaml"

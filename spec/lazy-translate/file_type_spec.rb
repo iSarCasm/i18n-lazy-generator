@@ -44,4 +44,14 @@ describe LazyTranslate::FileType do
       expect(subject.new('file.haml').source_updater).to eq LazyTranslate::SourceUpdaterHAML
     end
   end
+
+  describe '#reader' do
+    it do
+      expect(subject.new('file.html.haml').reader).to eq LazyTranslate::ReaderHAML
+    end
+
+    it do
+      expect(subject.new('file.html.erb').reader).to eq LazyTranslate::ReaderERB
+    end
+  end
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe LazyTranslate::ErbReader do
-  subject = LazyTranslate::ErbReader
+describe LazyTranslate::ReaderERB do
+  subject = LazyTranslate::ReaderERB
 
   describe '.substitute_vars_in_text' do
     it 'enumerates on each erb tag' do

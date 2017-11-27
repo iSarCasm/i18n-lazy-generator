@@ -5,52 +5,52 @@ describe LazyTranslate::TextToKeyName do
 
   tests = [
     {
-      input:    "it is rainy today",
+      input:    [LazyTranslate::ReaderERB, "it is rainy today"],
       output:   'it_is_rainy_today',
       comment:  "just a simple line of text"
     },
     {
-      input:    "it's 15% rainy today!",
+      input:    [LazyTranslate::ReaderERB, "it's 15% rainy today!"],
       output:   'its_15_rainy_today',
       comment:  "text with some special chars"
     },
     {
-      input:    "its 15 rainy today. I am so happy about it. Gonna tell all my friends this crap.",
+      input:    [LazyTranslate::ReaderERB, "its 15 rainy today. I am so happy about it. Gonna tell all my friends this crap."],
       output:   'its_15_rainy_today_i',
       comment:  "long text (should cut to 5 first words)"
     },
     {
-      input:    "hi bro",
+      input:    [LazyTranslate::ReaderERB, "hi bro"],
       output:   'hi_bro',
       comment:  "very short text"
     },
     {
-      input:    "Its <b>rainy</b> today",
+      input:    [LazyTranslate::ReaderERB, "Its <b>rainy</b> today"],
       output:   'its_rainy_today_html',
       comment:  "text with html tags (should add _html to an end & no tags in key name)"
     },
     {
-      input:    "Its <b>rainy</b> today",
+      input:    [LazyTranslate::ReaderERB, "Its <b>rainy</b> today"],
       output:   'its_rainy_today_html',
       comment:  "text with html tags (should add _html to an end & no tags in key name)"
     },
     {
-      input:    "<div class='col-md-1.5'>Its <b>rainy</b> today</div><em><br></em>",
+      input:    [LazyTranslate::ReaderERB, "<div class='col-md-1.5'>Its <b>rainy</b> today</div><em><br></em>"],
       output:   'its_rainy_today_html',
       comment:  "text with html tags (should add _html to an end & no tags in key name)"
     },
     {
-      input:    "<div><div>yo</em><alpachino alt='wtf'>",
+      input:    [LazyTranslate::ReaderERB, "<div><div>yo</em><alpachino alt='wtf'>"],
       output:   'yo_html',
       comment:  "text with html tags (should add _html to an end & no tags in key name)"
     },
     {
-      input:    "It is rainy <%= Time.now.day %>",
+      input:    [LazyTranslate::ReaderERB, "It is rainy <%= Time.now.day %>"],
       output:   'it_is_rainy_day',
       comment:  "text with erb"
     },
     {
-      input:    "It is rainy <%= link_to('today', 'today.com') %>",
+      input:    [LazyTranslate::ReaderERB, "It is rainy <%= link_to('today', 'today.com') %>"],
       output:   'it_is_rainy_today_html',
       comment:  "text with erb link"
     }
