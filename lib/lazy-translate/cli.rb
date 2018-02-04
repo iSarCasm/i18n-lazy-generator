@@ -1,7 +1,7 @@
 module LazyTranslate
   module CLI
     def self.start
-      LazyTranslate::Translator.translate(source_path: source_path, config_path: config_path, context_string: context)
+      Translator.translate(source_path: source_path, config_path: config_path, context_string: context)
     end
 
     private
