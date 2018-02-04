@@ -7,8 +7,11 @@ module LazyTranslate
       new_translations = source_parser.parse source_content
 
       reader = source_filetype.reader
-      new_translations.each { |t| t.translation_content = TextToKeyContent.convert(reader, t.original) }
-      new_translations.each { |t| t.translation_key = TextToKeyName.convert(reader, t.translation.content) }
+      new_translations.each do |translation|
+        translation.translation_content = TextToKeyContent.convert(reader, translation.original)
+        binding.pry
+        translation.translation_key = TextToKeyName.convert(reader, translation.translation_content.content)
+      end
 
       source_updater      = source_filetype.source_updater.new
       new_source_content  = source_updater.update source_content, new_translations
