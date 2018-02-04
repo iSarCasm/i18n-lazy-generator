@@ -5,7 +5,6 @@ module LazyTranslate
       raise 'No content passed' unless content
 
       make_unsafe_if_html_used(reader, content) do
-        puts content
         content = reader.substitute_vars_in_text(content) { |erb| erb_to_key(reader, erb) }
         content = HTML.remove_html(content)
         content = to_snake_case(content)
