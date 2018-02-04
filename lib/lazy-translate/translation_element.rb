@@ -19,7 +19,7 @@ module LazyTranslate
       raise 'Translation already applied' if applied
       @applied = true
       new_text = remove_old_text_part(text)
-      return add_translation_part(new_text)
+      add_translation_part(new_text)
     end
 
     private
